@@ -3,31 +3,52 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Calculadora Estándar | Universidad Salesiana de Bolivia</title>
 
-<!-- Bootstrap 5 CSS via CDN -->
+<!-- Bootstrap 5 -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
-<!-- Bootstrap Icons (opcional, para mejorar los botones) -->
+
+<!-- Bootstrap Icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css">
 
 <style>
+
+    /* ==========================================================
+       NUEVA PALETA DE COLORES
+       ========================================================== */
+
     :root{
-        --usb-azul: #003399;
-        --usb-rojo: #D31111;
-        --usb-dorado: #FFCC00;
-        --usb-fondo: #f8f9fa;
+        --color-principal: #5B21B6;
+        --color-principal-oscuro: #3B0764;
+        --color-secundario: #06B6D4;
+        --color-acento: #F59E0B;
+        --color-peligro: #E11D48;
+        --color-fondo: #F3F4F6;
+        --color-panel: #111827;
     }
 
     body{
-        background-color: var(--usb-fondo);
+        background-color: var(--color-fondo);
         font-family: 'Segoe UI', Roboto, Arial, sans-serif;
     }
 
-    /* ---------- Encabezado institucional ---------- */
+
+    /* ==========================================================
+       ENCABEZADO
+       ========================================================== */
+
     header.usb-header{
-        background: linear-gradient(135deg, var(--usb-azul) 0%, #001f66 100%);
+        background: linear-gradient(
+            135deg,
+            var(--color-principal) 0%,
+            var(--color-principal-oscuro) 100%
+        );
+
         color: #fff;
-        border-bottom: 6px solid var(--usb-dorado);
+
+        border-bottom: 6px solid var(--color-secundario);
+
         padding: 1.2rem 0;
     }
 
@@ -35,12 +56,23 @@
         width: 64px;
         height: 64px;
         flex-shrink: 0;
+
+        cursor: pointer;
+
+        transition: transform .2s ease;
+    }
+
+    .usb-logo:hover{
+        transform: scale(1.08);
     }
 
     .usb-firma{
         font-size: 0.85rem;
-        color: var(--usb-dorado);
+
+        color: var(--color-acento);
+
         font-weight: 600;
+
         letter-spacing: .3px;
     }
 
@@ -49,35 +81,63 @@
         letter-spacing: .5px;
     }
 
-    /* ---------- Tarjeta de la calculadora ---------- */
+
+    /* ==========================================================
+       TARJETA CALCULADORA
+       ========================================================== */
+
     .calc-card{
         max-width: 420px;
+
         margin: 2.5rem auto;
+
         border-radius: 1rem;
-        border: 3px solid var(--usb-azul);
+
+        border: 3px solid var(--color-principal);
+
         box-shadow: 0 8px 24px rgba(0,0,0,.12);
+
         overflow: hidden;
+
         background: #fff;
     }
 
+
+    /* ==========================================================
+       PANTALLA
+       ========================================================== */
+
     .calc-display{
-        background: #0d1b3d;
+        background: var(--color-panel);
+
         color: #fff;
+
         font-size: 2.4rem;
+
         text-align: right;
+
         padding: 1.1rem 1rem;
+
         min-height: 90px;
+
         word-wrap: break-word;
+
         word-break: break-all;
-        border-bottom: 4px solid var(--usb-dorado);
+
+        border-bottom: 4px solid var(--color-secundario);
+
         font-family: 'Consolas', monospace;
     }
 
     .calc-subdisplay{
-        color: #9fb3ff;
+        color: #67E8F9;
+
         font-size: 0.95rem;
+
         min-height: 1.2rem;
+
         text-align: right;
+
         font-family: 'Consolas', monospace;
     }
 
@@ -85,390 +145,1328 @@
         padding: 1rem;
     }
 
+
+    /* ==========================================================
+       BOTONES
+       ========================================================== */
+
     .btn-calc{
         font-size: 1.25rem;
+
         font-weight: 600;
+
         border-radius: .6rem;
+
         padding: .75rem 0;
+
         border: none;
     }
 
+
+    /* Números */
+
     .btn-numero{
-        background-color: #e9ecef;
-        color: #212529;
+        background-color: #E5E7EB;
+
+        color: #111827;
     }
-    .btn-numero:hover{ background-color: #dee2e6; }
+
+    .btn-numero:hover{
+        background-color: #D1D5DB;
+    }
+
+
+    /* Operadores */
 
     .btn-operador{
-        background-color: var(--usb-azul);
+        background-color: var(--color-principal);
+
         color: #fff;
     }
-    .btn-operador:hover{ background-color: #002266; color:#fff; }
+
+    .btn-operador:hover{
+        background-color: var(--color-principal-oscuro);
+
+        color: #fff;
+    }
+
+
+    /* Igual */
 
     .btn-igual{
-        background-color: var(--usb-dorado);
-        color: #212529;
+        background-color: var(--color-acento);
+
+        color: #111827;
     }
-    .btn-igual:hover{ background-color: #e6b800; }
+
+    .btn-igual:hover{
+        background-color: #D97706;
+    }
+
+
+    /* Limpiar */
 
     .btn-clear{
-        background-color: var(--usb-rojo);
+        background-color: var(--color-peligro);
+
         color: #fff;
     }
-    .btn-clear:hover{ background-color: #a80d0d; color:#fff; }
+
+    .btn-clear:hover{
+        background-color: #9F1239;
+
+        color: #fff;
+    }
+
+
+    /* Fibonacci */
 
     .btn-fibonacci{
-        background-color: var(--usb-rojo);
-        color: #fff;
+        background-color: var(--color-secundario);
+
+        color: #082F49;
+
         border-radius: .6rem;
+
         font-weight: 700;
-        border: 2px solid var(--usb-dorado);
+
+        border: 2px solid var(--color-principal);
     }
+
     .btn-fibonacci:hover{
-        background-color: #a80d0d;
+        background-color: #0891B2;
+
         color: #fff;
     }
 
+
+    /* ==========================================================
+       BOTÓN OCULTO
+       ========================================================== */
+
+    #botonSecreto{
+        display: none;
+
+        background: linear-gradient(
+            135deg,
+            #7C3AED,
+            #06B6D4
+        );
+
+        color: white;
+
+        border: 2px solid var(--color-acento);
+
+        border-radius: .6rem;
+
+        font-weight: 700;
+
+        padding: .75rem;
+
+        width: 100%;
+
+        margin-top: 10px;
+
+        animation: aparecer .6s ease;
+    }
+
+    #botonSecreto:hover{
+        transform: scale(1.02);
+
+        box-shadow: 0 5px 15px rgba(0,0,0,.2);
+    }
+
+    @keyframes aparecer{
+
+        from{
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+
+        to{
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+    }
+
+
+    /* ==========================================================
+       MODAL
+       ========================================================== */
+
     .modal-header.usb-modal-header{
-        background-color: var(--usb-azul);
+        background-color: var(--color-principal);
+
         color: #fff;
-        border-bottom: 4px solid var(--usb-dorado);
+
+        border-bottom: 4px solid var(--color-secundario);
     }
 
     .fib-badge{
-        background-color: var(--usb-azul);
+        background-color: var(--color-principal);
+
         color: #fff;
-        border: 2px solid var(--usb-dorado);
+
+        border: 2px solid var(--color-secundario);
     }
+
+
+    /* ==========================================================
+       MENSAJE BOTÓN OCULTO
+       ========================================================== */
+
+    #mensajeSecreto{
+        display: none;
+
+        font-size: .8rem;
+
+        color: var(--color-principal);
+
+        text-align: center;
+
+        margin-top: 8px;
+
+        font-weight: 600;
+    }
+
+
+    /* ==========================================================
+       FOOTER
+       ========================================================== */
 
     footer.usb-footer{
         text-align: center;
+
         padding: 1rem 0 2rem 0;
+
         color: #495057;
+
         font-size: .85rem;
     }
+
 </style>
 </head>
+
+
 <body>
 
-<!-- ============ ENCABEZADO INSTITUCIONAL ============ -->
+
+<!-- ==========================================================
+     ENCABEZADO
+     ========================================================== -->
+
 <header class="usb-header">
+
     <div class="container d-flex flex-column flex-sm-row align-items-center gap-3">
-        <!-- Logo institucional (representación SVG con los colores oficiales) -->
-        <svg class="usb-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Logo Universidad Salesiana de Bolivia">
-            <circle cx="50" cy="50" r="47" fill="#003399" stroke="#FFCC00" stroke-width="5"/>
-            <text x="50" y="66" font-size="52" font-family="Georgia, serif" font-weight="bold"
-                  text-anchor="middle" fill="#D31111">S</text>
+
+        <!-- LOGO -->
+
+        <svg
+            id="logoSecreto"
+            class="usb-logo"
+            viewBox="0 0 100 100"
+            xmlns="http://www.w3.org/2000/svg"
+            role="img"
+            aria-label="Logo Universidad Salesiana de Bolivia">
+
+            <circle
+                cx="50"
+                cy="50"
+                r="47"
+                fill="#5B21B6"
+                stroke="#06B6D4"
+                stroke-width="5"/>
+
+            <text
+                x="50"
+                y="66"
+                font-size="52"
+                font-family="Georgia, serif"
+                font-weight="bold"
+                text-anchor="middle"
+                fill="#F59E0B">
+
+                S
+
+            </text>
+
         </svg>
+
+
         <div class="text-center text-sm-start">
-            <div class="usb-titulo fs-4">Universidad Salesiana de Bolivia</div>
-            <div class="fs-6">Asignatura: Programación Avanzada</div>
-            <div class="usb-firma mt-1">Desarrollado por: Ing. MACRO (Ingeniero Miguel Angel Cruz Ramos)</div>
+
+            <div class="usb-titulo fs-4">
+                Universidad Salesiana de Bolivia
+            </div>
+
+            <div class="fs-6">
+                Asignatura: Programación Avanzada
+            </div>
+
+            <div class="usb-firma mt-1">
+                Desarrollado por: Ing. MACRO
+                (Ingeniero Miguel Angel Cruz Ramos)
+            </div>
+
         </div>
+
     </div>
+
 </header>
 
-<!-- ============ CALCULADORA ============ -->
+
+
+<!-- ==========================================================
+     CALCULADORA
+     ========================================================== -->
+
 <main class="container">
+
     <div class="calc-card">
 
-        <!-- Pantalla digital -->
+
+        <!-- PANTALLA -->
+
         <div class="calc-display">
-            <div id="subdisplay" class="calc-subdisplay">&nbsp;</div>
-            <div id="display">0</div>
+
+            <div id="subdisplay" class="calc-subdisplay">
+                &nbsp;
+            </div>
+
+            <div id="display">
+                0
+            </div>
+
         </div>
 
+
+
         <div class="calc-body">
-            <!-- Fila: limpiar y cambio de signo -->
+
+
+            <!-- LIMPIAR Y SIGNO -->
+
             <div class="row g-2 mb-2">
+
                 <div class="col-6">
-                    <button class="btn btn-clear btn-calc w-100" onclick="limpiarPantalla()">C / AC</button>
+
+                    <button
+                        class="btn btn-clear btn-calc w-100"
+                        onclick="limpiarPantalla()">
+
+                        C / AC
+
+                    </button>
+
                 </div>
+
+
                 <div class="col-6">
-                    <button class="btn btn-operador btn-calc w-100" onclick="cambiarSigno()">±</button>
+
+                    <button
+                        class="btn btn-operador btn-calc w-100"
+                        onclick="cambiarSigno()">
+
+                        ±
+
+                    </button>
+
                 </div>
+
             </div>
 
-            <!-- Teclado numérico y operadores -->
+
+
+            <!-- TECLADO -->
+
             <div class="row g-2">
-                <div class="col-3"><button class="btn btn-numero btn-calc w-100" onclick="agregarDigito('7')">7</button></div>
-                <div class="col-3"><button class="btn btn-numero btn-calc w-100" onclick="agregarDigito('8')">8</button></div>
-                <div class="col-3"><button class="btn btn-numero btn-calc w-100" onclick="agregarDigito('9')">9</button></div>
-                <div class="col-3"><button class="btn btn-operador btn-calc w-100" onclick="agregarOperador('/')">÷</button></div>
 
-                <div class="col-3"><button class="btn btn-numero btn-calc w-100" onclick="agregarDigito('4')">4</button></div>
-                <div class="col-3"><button class="btn btn-numero btn-calc w-100" onclick="agregarDigito('5')">5</button></div>
-                <div class="col-3"><button class="btn btn-numero btn-calc w-100" onclick="agregarDigito('6')">6</button></div>
-                <div class="col-3"><button class="btn btn-operador btn-calc w-100" onclick="agregarOperador('*')">×</button></div>
 
-                <div class="col-3"><button class="btn btn-numero btn-calc w-100" onclick="agregarDigito('1')">1</button></div>
-                <div class="col-3"><button class="btn btn-numero btn-calc w-100" onclick="agregarDigito('2')">2</button></div>
-                <div class="col-3"><button class="btn btn-numero btn-calc w-100" onclick="agregarDigito('3')">3</button></div>
-                <div class="col-3"><button class="btn btn-operador btn-calc w-100" onclick="agregarOperador('-')">−</button></div>
+                <div class="col-3">
+                    <button
+                        class="btn btn-numero btn-calc w-100"
+                        onclick="agregarDigito('7')">
+                        7
+                    </button>
+                </div>
 
-                <div class="col-3"><button class="btn btn-numero btn-calc w-100" onclick="agregarDigito('0')">0</button></div>
-                <div class="col-3"><button class="btn btn-numero btn-calc w-100" onclick="agregarDigito('.')">.</button></div>
-                <div class="col-3"><button class="btn btn-igual btn-calc w-100" onclick="calcularResultado()">=</button></div>
-                <div class="col-3"><button class="btn btn-operador btn-calc w-100" onclick="agregarOperador('+')">+</button></div>
+                <div class="col-3">
+                    <button
+                        class="btn btn-numero btn-calc w-100"
+                        onclick="agregarDigito('8')">
+                        8
+                    </button>
+                </div>
+
+                <div class="col-3">
+                    <button
+                        class="btn btn-numero btn-calc w-100"
+                        onclick="agregarDigito('9')">
+                        9
+                    </button>
+                </div>
+
+                <div class="col-3">
+                    <button
+                        class="btn btn-operador btn-calc w-100"
+                        onclick="agregarOperador('/')">
+                        ÷
+                    </button>
+                </div>
+
+
+
+                <div class="col-3">
+                    <button
+                        class="btn btn-numero btn-calc w-100"
+                        onclick="agregarDigito('4')">
+                        4
+                    </button>
+                </div>
+
+                <div class="col-3">
+                    <button
+                        class="btn btn-numero btn-calc w-100"
+                        onclick="agregarDigito('5')">
+                        5
+                    </button>
+                </div>
+
+                <div class="col-3">
+                    <button
+                        class="btn btn-numero btn-calc w-100"
+                        onclick="agregarDigito('6')">
+                        6
+                    </button>
+                </div>
+
+                <div class="col-3">
+                    <button
+                        class="btn btn-operador btn-calc w-100"
+                        onclick="agregarOperador('*')">
+                        ×
+                    </button>
+                </div>
+
+
+
+                <div class="col-3">
+                    <button
+                        class="btn btn-numero btn-calc w-100"
+                        onclick="agregarDigito('1')">
+                        1
+                    </button>
+                </div>
+
+                <div class="col-3">
+                    <button
+                        class="btn btn-numero btn-calc w-100"
+                        onclick="agregarDigito('2')">
+                        2
+                    </button>
+                </div>
+
+                <div class="col-3">
+                    <button
+                        class="btn btn-numero btn-calc w-100"
+                        onclick="agregarDigito('3')">
+                        3
+                    </button>
+                </div>
+
+                <div class="col-3">
+                    <button
+                        class="btn btn-operador btn-calc w-100"
+                        onclick="agregarOperador('-')">
+                        −
+                    </button>
+                </div>
+
+
+
+                <div class="col-3">
+                    <button
+                        class="btn btn-numero btn-calc w-100"
+                        onclick="agregarDigito('0')">
+                        0
+                    </button>
+                </div>
+
+                <div class="col-3">
+                    <button
+                        class="btn btn-numero btn-calc w-100"
+                        onclick="agregarDigito('.')">
+                        .
+                    </button>
+                </div>
+
+                <div class="col-3">
+                    <button
+                        class="btn btn-igual btn-calc w-100"
+                        onclick="calcularResultado()">
+                        =
+                    </button>
+                </div>
+
+                <div class="col-3">
+                    <button
+                        class="btn btn-operador btn-calc w-100"
+                        onclick="agregarOperador('+')">
+                        +
+                    </button>
+                </div>
+
             </div>
+
+
 
             <hr class="mt-3">
 
-            <!-- Sección dedicada al generador de Fibonacci -->
+
+
+            <!-- FIBONACCI -->
+
             <div class="mt-2">
+
                 <p class="mb-2 small text-muted">
-                    Usa el número que está actualmente en pantalla como <strong>N</strong> para generar
-                    los primeros N términos de la Serie de Fibonacci.
+
+                    Usa el número que está actualmente en pantalla como
+                    <strong>N</strong> para generar los primeros N términos
+                    de la Serie de Fibonacci.
+
                 </p>
-                <button class="btn btn-fibonacci btn-calc w-100" data-bs-toggle="modal" data-bs-target="#fibModal" onclick="generarFibonacci()">
-                    <i class="bi bi-diagram-3"></i> Generar Fibonacci (N)
+
+
+                <button
+                    class="btn btn-fibonacci btn-calc w-100"
+                    data-bs-toggle="modal"
+                    data-bs-target="#fibModal"
+                    onclick="generarFibonacci()">
+
+                    <i class="bi bi-diagram-3"></i>
+
+                    Generar Fibonacci (N)
+
                 </button>
+
+
+                <!-- BOTÓN OCULTO -->
+
+                <button
+                    id="botonSecreto"
+                    onclick="generarFibonacciRecursivo()">
+
+                    <i class="bi bi-unlock-fill"></i>
+
+                    Modo Fibonacci Recursivo
+
+                </button>
+
+
+                <div id="mensajeSecreto">
+
+                    🔓 ¡Has descubierto el botón oculto!
+
+                </div>
+
             </div>
+
         </div>
+
     </div>
+
 </main>
 
-<!-- ============ MODAL DE RESULTADOS FIBONACCI ============ -->
-<div class="modal fade" id="fibModal" tabindex="-1" aria-labelledby="fibModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header usb-modal-header">
-        <h5 class="modal-title" id="fibModalLabel"><i class="bi bi-stars"></i> Serie de Fibonacci</h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-      </div>
-      <div class="modal-body">
-        <div id="fibContenido"></div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-clear" data-bs-dismiss="modal">Cerrar</button>
-      </div>
+
+
+<!-- ==========================================================
+     MODAL FIBONACCI
+     ========================================================== -->
+
+<div
+    class="modal fade"
+    id="fibModal"
+    tabindex="-1"
+    aria-labelledby="fibModalLabel"
+    aria-hidden="true">
+
+    <div class="modal-dialog modal-dialog-centered">
+
+        <div class="modal-content">
+
+
+            <div class="modal-header usb-modal-header">
+
+                <h5
+                    class="modal-title"
+                    id="fibModalLabel">
+
+                    <i class="bi bi-stars"></i>
+
+                    Serie de Fibonacci
+
+                </h5>
+
+
+                <button
+                    type="button"
+                    class="btn-close btn-close-white"
+                    data-bs-dismiss="modal"
+                    aria-label="Cerrar">
+                </button>
+
+            </div>
+
+
+            <div class="modal-body">
+
+                <div id="fibContenido"></div>
+
+            </div>
+
+
+            <div class="modal-footer">
+
+                <button
+                    type="button"
+                    class="btn btn-clear"
+                    data-bs-dismiss="modal">
+
+                    Cerrar
+
+                </button>
+
+            </div>
+
+        </div>
+
     </div>
-  </div>
+
 </div>
 
+
+
+<!-- ==========================================================
+     FOOTER
+     ========================================================== -->
+
 <footer class="usb-footer">
-    &copy; 2026 Universidad Salesiana de Bolivia — Programación Avanzada
+
+    &copy; 2026 Universidad Salesiana de Bolivia —
+    Programación Avanzada
+
 </footer>
 
-<!-- Bootstrap 5 JS Bundle (incluye Popper) via CDN -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+
+
+<!-- Bootstrap JS -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/js/bootstrap.bundle.min.js">
+</script>
+
+
 
 <script>
+
 /* ==========================================================
-   LÓGICA DE LA CALCULADORA ESTÁNDAR
+   CALCULADORA
    ========================================================== */
 
-// Estado interno de la calculadora
-let pantallaActual = "0";      // Lo que se muestra actualmente
-let operandoAnterior = null;   // Primer operando guardado
-let operadorPendiente = null;  // Operador seleccionado (+,-,*,/)
-let esperandoNuevoNumero = false; // Indica si el próximo dígito reinicia la pantalla
+let pantallaActual = "0";
 
-const display = document.getElementById('display');
-const subdisplay = document.getElementById('subdisplay');
+let operandoAnterior = null;
 
-// Actualiza el HTML de la pantalla con el valor actual
+let operadorPendiente = null;
+
+let esperandoNuevoNumero = false;
+
+
+const display =
+    document.getElementById('display');
+
+const subdisplay =
+    document.getElementById('subdisplay');
+
+
+
 function actualizarPantalla(){
+
     display.textContent = pantallaActual;
+
 }
 
-// Agrega un dígito o el punto decimal a la pantalla
+
+
 function agregarDigito(digito){
-    // Si se estaba esperando un nuevo número (tras un operador o el "="),
-    // se reinicia la pantalla en lugar de concatenar.
-    if (esperandoNuevoNumero){
-        pantallaActual = (digito === '.') ? "0." : digito;
+
+    if(esperandoNuevoNumero){
+
+        pantallaActual =
+            (digito === '.')
+            ? "0."
+            : digito;
+
         esperandoNuevoNumero = false;
+
         actualizarPantalla();
+
         return;
     }
 
-    // Evita múltiples puntos decimales
-    if (digito === '.' && pantallaActual.includes('.')) return;
 
-    // Reemplaza el "0" inicial salvo que se esté agregando un punto
-    if (pantallaActual === "0" && digito !== '.'){
-        pantallaActual = digito;
-    } else {
-        pantallaActual += digito;
+    if(
+        digito === '.'
+        &&
+        pantallaActual.includes('.')
+    ){
+
+        return;
+
     }
+
+
+    if(
+        pantallaActual === "0"
+        &&
+        digito !== '.'
+    ){
+
+        pantallaActual = digito;
+
+    }else{
+
+        pantallaActual += digito;
+
+    }
+
+
     actualizarPantalla();
+
 }
 
-// Limpia completamente el estado de la calculadora (botón C / AC)
+
+
 function limpiarPantalla(){
+
     pantallaActual = "0";
+
     operandoAnterior = null;
+
     operadorPendiente = null;
+
     esperandoNuevoNumero = false;
-    subdisplay.textContent = "\u00A0"; // espacio en blanco (nbsp)
+
+    subdisplay.textContent = "\u00A0";
+
     actualizarPantalla();
+
 }
 
-// Cambia el signo del número actual (+/-)
+
+
 function cambiarSigno(){
-    if (pantallaActual === "0") return;
-    pantallaActual = pantallaActual.startsWith('-')
+
+    if(pantallaActual === "0")
+        return;
+
+
+    pantallaActual =
+        pantallaActual.startsWith('-')
         ? pantallaActual.slice(1)
         : '-' + pantallaActual;
+
+
     actualizarPantalla();
+
 }
 
-// Guarda el operador seleccionado y prepara el segundo operando
-function agregarOperador(operador){
-    const valorActual = parseFloat(pantallaActual);
 
-    if (operadorPendiente !== null && !esperandoNuevoNumero){
-        // Si ya había una operación pendiente, se resuelve en cadena
+
+function agregarOperador(operador){
+
+    const valorActual =
+        parseFloat(pantallaActual);
+
+
+    if(
+        operadorPendiente !== null
+        &&
+        !esperandoNuevoNumero
+    ){
+
         calcularResultado();
-        operandoAnterior = parseFloat(display.textContent);
-    } else {
-        operandoAnterior = valorActual;
+
+        operandoAnterior =
+            parseFloat(display.textContent);
+
+    }else{
+
+        operandoAnterior =
+            valorActual;
+
     }
+
 
     operadorPendiente = operador;
+
     esperandoNuevoNumero = true;
-    subdisplay.textContent = `${formatearNumero(operandoAnterior)} ${simboloOperador(operador)}`;
+
+
+    subdisplay.textContent =
+        `${formatearNumero(operandoAnterior)}
+        ${simboloOperador(operador)}`;
+
 }
 
-// Traduce el operador interno a un símbolo visual
+
+
 function simboloOperador(op){
-    return { '+':'+', '-':'−', '*':'×', '/':'÷' }[op] || op;
+
+    return {
+
+        '+': '+',
+
+        '-': '−',
+
+        '*': '×',
+
+        '/': '÷'
+
+    }[op] || op;
+
 }
 
-// Formatea números largos para el sub-display (evita notación fea)
+
+
 function formatearNumero(n){
-    return Number.isFinite(n) ? parseFloat(n.toFixed(10)).toString() : n;
+
+    return Number.isFinite(n)
+
+        ? parseFloat(n.toFixed(10)).toString()
+
+        : n;
+
 }
 
-// Ejecuta la operación matemática pendiente y muestra el resultado
+
+
 function calcularResultado(){
-    if (operadorPendiente === null || operandoAnterior === null) return;
 
-    const operandoActual = parseFloat(pantallaActual);
-    let resultado;
+    if(
+        operadorPendiente === null
+        ||
+        operandoAnterior === null
+    ){
 
-    switch (operadorPendiente){
-        case '+': resultado = operandoAnterior + operandoActual; break;
-        case '-': resultado = operandoAnterior - operandoActual; break;
-        case '*': resultado = operandoAnterior * operandoActual; break;
-        case '/':
-            if (operandoActual === 0){
-                pantallaActual = "Error: div/0";
-                actualizarPantalla();
-                operadorPendiente = null;
-                operandoAnterior = null;
-                esperandoNuevoNumero = true;
-                return;
-            }
-            resultado = operandoAnterior / operandoActual;
-            break;
-        default: return;
+        return;
+
     }
 
-    subdisplay.textContent = `${formatearNumero(operandoAnterior)} ${simboloOperador(operadorPendiente)} ${formatearNumero(operandoActual)} =`;
-    pantallaActual = formatearNumero(resultado).toString();
+
+    const operandoActual =
+        parseFloat(pantallaActual);
+
+
+    let resultado;
+
+
+    switch(operadorPendiente){
+
+        case '+':
+
+            resultado =
+                operandoAnterior +
+                operandoActual;
+
+            break;
+
+
+        case '-':
+
+            resultado =
+                operandoAnterior -
+                operandoActual;
+
+            break;
+
+
+        case '*':
+
+            resultado =
+                operandoAnterior *
+                operandoActual;
+
+            break;
+
+
+        case '/':
+
+            if(operandoActual === 0){
+
+                pantallaActual =
+                    "Error: div/0";
+
+                actualizarPantalla();
+
+                operadorPendiente = null;
+
+                operandoAnterior = null;
+
+                esperandoNuevoNumero = true;
+
+                return;
+
+            }
+
+
+            resultado =
+                operandoAnterior /
+                operandoActual;
+
+            break;
+
+
+        default:
+
+            return;
+
+    }
+
+
+    subdisplay.textContent =
+        `${formatearNumero(operandoAnterior)}
+        ${simboloOperador(operadorPendiente)}
+        ${formatearNumero(operandoActual)} =`;
+
+
+    pantallaActual =
+        formatearNumero(resultado).toString();
+
+
     operandoAnterior = null;
+
     operadorPendiente = null;
+
     esperandoNuevoNumero = true;
+
+
     actualizarPantalla();
+
 }
+
 
 
 /* ==========================================================
-   GENERADOR DE LA SERIE DE FIBONACCI
-   ==========================================================
-   Objetivo pedagógico: mostrar a los estudiantes dos enfoques
-   posibles para resolver el mismo problema (iterativo y
-   recursivo), comparando su comportamiento y eficiencia.
+   FIBONACCI ITERATIVO
    ========================================================== */
 
-// Enfoque ITERATIVO (el que se utiliza por defecto en la app).
-// Ventaja: complejidad O(n) en tiempo y O(1) en memoria adicional
-// (sin contar el arreglo de resultados), ya que no apila llamadas
-// en la pila de ejecución como sí lo hace la recursión.
 function fibonacciIterativo(n){
+
     const serie = [];
 
-    // Casos base de la serie: F(1) = 0, F(2) = 1
-    for (let i = 0; i < n; i++){
-        if (i === 0){
+
+    for(let i = 0; i < n; i++){
+
+        if(i === 0){
+
             serie.push(0);
-        } else if (i === 1){
+
+        }else if(i === 1){
+
             serie.push(1);
-        } else {
-            // Cada término es la suma de los dos anteriores.
-            // Se recorre "una sola vez" el problema (bucle),
-            // por eso es la opción recomendada para valores de N grandes.
-            serie.push(serie[i - 1] + serie[i - 2]);
+
+        }else{
+
+            serie.push(
+                serie[i - 1] +
+                serie[i - 2]
+            );
+
         }
+
     }
+
+
     return serie;
+
 }
 
-// Enfoque RECURSIVO (incluido solo con fines didácticos).
-// Se muestra cómo el problema F(n) se puede definir en función
-// de subproblemas más pequeños: F(n) = F(n-1) + F(n-2).
-// ADVERTENCIA para los estudiantes: esta versión "ingenua" recalcula
-// muchas veces los mismos subproblemas (complejidad exponencial
-// aproximada O(2^n)), por lo que NO se usa para generar la serie
-// completa en esta app, pero sirve para explicar el concepto de
-// recursividad y por qué a veces conviene "memoizar" o preferir
-// el enfoque iterativo.
+
+
+/* ==========================================================
+   FIBONACCI RECURSIVO
+   ========================================================== */
+
 function fibonacciRecursivo(posicion){
-    // Caso base: las dos primeras posiciones de la serie
-    if (posicion === 0) return 0;
-    if (posicion === 1) return 1;
-    // Caso recursivo: la llamada se descompone en dos subproblemas
-    return fibonacciRecursivo(posicion - 1) + fibonacciRecursivo(posicion - 2);
+
+    if(posicion === 0)
+        return 0;
+
+
+    if(posicion === 1)
+        return 1;
+
+
+    return fibonacciRecursivo(posicion - 1)
+         +
+           fibonacciRecursivo(posicion - 2);
+
 }
 
-// Función principal invocada por el botón "Generar Fibonacci (N)"
+
+
+/* ==========================================================
+   FIBONACCI NORMAL
+   ========================================================== */
+
 function generarFibonacci(){
-    const contenedor = document.getElementById('fibContenido');
-    // N se toma directamente del valor que hay en la pantalla de la calculadora
-    const n = Number(pantallaActual);
 
-    // --- Validaciones solicitadas ---
-    // N debe ser un número entero mayor o igual a 1.
-    if (!Number.isInteger(n) || n < 1){
+    const contenedor =
+        document.getElementById('fibContenido');
+
+
+    const n =
+        Number(pantallaActual);
+
+
+    if(
+        !Number.isInteger(n)
+        ||
+        n < 1
+    ){
+
         contenedor.innerHTML = `
+
             <div class="alert alert-danger mb-0">
+
                 <i class="bi bi-exclamation-triangle-fill"></i>
-                El valor en pantalla (<strong>${pantallaActual}</strong>) no es válido.
-                Ingresa un número entero <strong>mayor o igual a 1</strong> antes de generar la serie.
-            </div>`;
+
+                El valor en pantalla
+                (<strong>${pantallaActual}</strong>)
+                no es válido.
+
+                Ingresa un número entero
+                <strong>mayor o igual a 1</strong>.
+
+            </div>
+
+        `;
+
         return;
+
     }
 
-    // Por rendimiento del navegador, se limita un N razonable para mostrar en pantalla
+
     const N_MAXIMO = 1000;
-    if (n > N_MAXIMO){
+
+
+    if(n > N_MAXIMO){
+
         contenedor.innerHTML = `
+
             <div class="alert alert-warning mb-0">
+
                 <i class="bi bi-exclamation-triangle-fill"></i>
-                Por motivos de rendimiento, el máximo permitido es ${N_MAXIMO}.
-                Intenta con un valor menor.
-            </div>`;
+
+                Por motivos de rendimiento,
+                el máximo permitido es
+                ${N_MAXIMO}.
+
+            </div>
+
+        `;
+
         return;
+
     }
 
-    // Se genera la serie usando el enfoque iterativo (eficiente)
-    const serie = fibonacciIterativo(n);
 
-    // Se construyen "badges" (etiquetas) con cada término de la serie
-    const badges = serie
-        .map((valor, indice) => `<span class="badge fib-badge m-1 p-2">F(${indice + 1}) = ${valor}</span>`)
+    const serie =
+        fibonacciIterativo(n);
+
+
+    const badges =
+        serie
+
+        .map(
+
+            (valor, indice) => `
+
+                <span
+                    class="badge fib-badge m-1 p-2">
+
+                    F(${indice + 1}) = ${valor}
+
+                </span>
+
+            `
+
+        )
+
         .join('');
 
+
     contenedor.innerHTML = `
-        <p>Primeros <strong>${n}</strong> términos de la Serie de Fibonacci:</p>
-        <div class="d-flex flex-wrap">${badges}</div>
+
+        <p>
+
+            Primeros
+            <strong>${n}</strong>
+            términos de la Serie de Fibonacci:
+
+        </p>
+
+        <div class="d-flex flex-wrap">
+
+            ${badges}
+
+        </div>
+
     `;
+
 }
 
-// Inicializa la pantalla al cargar la página
+
+
+/* ==========================================================
+   BOTÓN OCULTO
+   ========================================================== */
+
+/*
+
+   El botón secreto se descubre al hacer
+   5 clics sobre el logo.
+
+*/
+
+let clicsSecretos = 0;
+
+
+const logoSecreto =
+    document.getElementById('logoSecreto');
+
+
+logoSecreto.addEventListener(
+    'click',
+    descubrirBoton
+);
+
+
+
+function descubrirBoton(){
+
+    clicsSecretos++;
+
+
+    if(clicsSecretos === 5){
+
+        const boton =
+            document.getElementById('botonSecreto');
+
+
+        const mensaje =
+            document.getElementById('mensajeSecreto');
+
+
+        boton.style.display = 'block';
+
+        mensaje.style.display = 'block';
+
+
+        /*
+           Después de descubrirlo,
+           el contador vuelve a cero.
+        */
+
+        clicsSecretos = 0;
+
+    }
+
+}
+
+
+
+/* ==========================================================
+   FUNCIÓN DEL BOTÓN SECRETO
+   ========================================================== */
+
+function generarFibonacciRecursivo(){
+
+    const contenedor =
+        document.getElementById('fibContenido');
+
+
+    const n =
+        Number(pantallaActual);
+
+
+    if(
+        !Number.isInteger(n)
+        ||
+        n < 1
+    ){
+
+        contenedor.innerHTML = `
+
+            <div class="alert alert-danger">
+
+                <i class="bi bi-exclamation-triangle-fill"></i>
+
+                Debes ingresar un número entero
+                mayor o igual a 1.
+
+            </div>
+
+        `;
+
+        abrirModal();
+
+        return;
+
+    }
+
+
+    /*
+       Para la versión recursiva utilizamos
+       un límite menor para evitar demasiadas
+       llamadas recursivas.
+    */
+
+    const LIMITE_RECURSIVO = 35;
+
+
+    if(n > LIMITE_RECURSIVO){
+
+        contenedor.innerHTML = `
+
+            <div class="alert alert-warning">
+
+                <i class="bi bi-exclamation-triangle-fill"></i>
+
+                El modo recursivo está limitado
+                a <strong>${LIMITE_RECURSIVO}</strong>
+                términos.
+
+                <br><br>
+
+                Para valores mayores utiliza
+                el botón normal de Fibonacci.
+
+            </div>
+
+        `;
+
+        abrirModal();
+
+        return;
+
+    }
+
+
+    const serie = [];
+
+
+    for(let i = 0; i < n; i++){
+
+        serie.push(
+            fibonacciRecursivo(i)
+        );
+
+    }
+
+
+    const badges =
+        serie
+
+        .map(
+
+            (valor, indice) => `
+
+                <span
+                    class="badge fib-badge m-1 p-2">
+
+                    F(${indice + 1}) = ${valor}
+
+                </span>
+
+            `
+
+        )
+
+        .join('');
+
+
+    contenedor.innerHTML = `
+
+        <div class="alert alert-info">
+
+            <i class="bi bi-cpu"></i>
+
+            <strong>Modo Fibonacci Recursivo</strong>
+
+            <br>
+
+            La serie fue generada utilizando
+            una función recursiva.
+
+        </div>
+
+
+        <p>
+
+            Primeros
+            <strong>${n}</strong>
+            términos:
+
+        </p>
+
+
+        <div class="d-flex flex-wrap">
+
+            ${badges}
+
+        </div>
+
+    `;
+
+
+    abrirModal();
+
+}
+
+
+
+/* ==========================================================
+   ABRIR MODAL
+   ========================================================== */
+
+function abrirModal(){
+
+    const modalElemento =
+        document.getElementById('fibModal');
+
+
+    const modal =
+        bootstrap.Modal.getOrCreateInstance(
+            modalElemento
+        );
+
+
+    modal.show();
+
+}
+
+
+
+/* ==========================================================
+   INICIAR
+   ========================================================== */
+
 actualizarPantalla();
+
 </script>
+
+
 </body>
 </html>
